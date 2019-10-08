@@ -6,10 +6,12 @@ Wraps the following basic command-line functionality to your package:
     package.
 2. By default, will automatically add `--version`/`-v` and `--help`/`-h`
     flags to the options defined in your targeted file's `definitions`
-    (processed by `command-line-args`) and `sections.optionList` (processed
+    (processed by `command-line-args`) and `sections[1].optionList` (processed
     by `command-line-usage`). When your users call `--help`, these two flags
     will be shown there. When your users call `--version`, it will output
-    the current version of your `package.json`).
+    the current `version` of your `package.json`).
+3. By default, will automatically add `header` to `sections[0]` if not
+    present (based on the `name` in `package.json`).
 
 ## Install
 
@@ -49,10 +51,11 @@ const options = cliBasics({
   //  explicit `packageJsonPath`; has no effect on `package.json` if
   //  relying on the default)
   cwd: __dirname,
-  packageJsonPath: path.join(process.cwd(), 'package.json'),
   options: {
+    packageJsonPath: path.join(process.cwd(), 'package.json'),
     autoAddVersion: true,
     autoAddHelp: true,
+    autoAddHeader: true,
     updateNotifierOptions: {
       // Options besides `pkg`
       updateCheckInterval: 1000 * 60 * 60 * 24,

@@ -6,30 +6,76 @@ const updateNotifier = require('update-notifier');
 const commandLineArgs = require('command-line-args');
 const commandLineUsage = require('command-line-usage');
 
-module.exports = function (optionsPath, packageJsonPath, options) {
-  let cwd;
-  if (optionsPath && typeof optionsPath === 'object') {
-    ({optionsPath, packageJsonPath, options, cwd} = optionsPath);
-  }
-  cwd = cwd || process.cwd();
+const getPackageJson = (options, cwd) => {
+  let {packageJsonPath} = options;
   if (!packageJsonPath) {
     // Don't use the user `cwd` by default for `package.json`
     packageJsonPath = join(process.cwd(), 'package.json');
   } else if (!isAbsolute(packageJsonPath)) {
     packageJsonPath = join(cwd, packageJsonPath);
   }
-  options = options || {};
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  return require(packageJsonPath);
+};
+
+const autoAdd = exports.autoAdd = function (optionsPath, options) {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
-  optionsPath = join(cwd, optionsPath);
+  let cwd;
+  if (optionsPath && typeof optionsPath === 'object') {
+    ({optionsPath, options, cwd} = optionsPath);
+  }
+  options = options || {};
+  cwd = cwd || process.cwd();
+  const {
+    pkg = getPackageJson(options, cwd)
+  } = options;
 
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  const pkg = require(packageJsonPath);
+  optionsPath = join(cwd, optionsPath);
   const {
     definitions: optionDefinitions, sections: cliSections
   // eslint-disable-next-line global-require, import/no-dynamic-require
   } = require(optionsPath);
+
+  if (options.autoAddVersion !== false && optionDefinitions.every(
+    (def) => def.name !== 'version' && def.alias !== 'v'
+  )) {
+    const versionInfo = {name: 'version', type: Boolean, alias: 'v'};
+    optionDefinitions.push(versionInfo);
+    if (cliSections[1] && cliSections[1].optionList) {
+      cliSections[1].optionList.push(versionInfo);
+    }
+  }
+  if (options.autoAddHelp !== false && optionDefinitions.every(
+    (def) => def.name !== 'help' && def.alias !== 'h'
+  )) {
+    const helpInfo = {name: 'help', type: Boolean, alias: 'h'};
+    optionDefinitions.push(helpInfo);
+    if (cliSections[1] && cliSections[1].optionList) {
+      cliSections[1].optionList.push(helpInfo);
+    }
+  }
+  if (options.autoAddHeader !== false && cliSections[0] &&
+      !cliSections[0].header
+  ) {
+    cliSections[0].header = pkg.name;
+  }
+
+  return {definitions: optionDefinitions, sections: cliSections};
+};
+
+exports.cliBasics = function (optionsPath, options) {
+  if (!optionsPath) {
+    throw new TypeError(`You must include an \`optionsPath\`.`);
+  }
+  let cwd;
+  if (typeof optionsPath === 'object') {
+    ({optionsPath, options, cwd} = optionsPath);
+  }
+  options = options || {};
+  cwd = cwd || process.cwd();
+  const pkg = getPackageJson(options, cwd);
 
   // check if a new version is available and print an update notification
   const notifier = updateNotifier({
@@ -43,20 +89,9 @@ module.exports = function (optionsPath, packageJsonPath, options) {
     });
   }
 
-  if (options.autoAddVersion !== false && optionDefinitions.every(
-    (def) => def.name !== 'version' && def.alias !== 'v'
-  )) {
-    const versionInfo = {name: 'version', type: Boolean, alias: 'v'};
-    optionDefinitions.push(versionInfo);
-    cliSections.optionList.push(versionInfo);
-  }
-  if (options.autoAddHelp !== false && optionDefinitions.every(
-    (def) => def.name !== 'help' && def.alias !== 'h'
-  )) {
-    const helpInfo = {name: 'help', type: Boolean, alias: 'h'};
-    optionDefinitions.push(helpInfo);
-    cliSections.optionList.push(helpInfo);
-  }
+  const {
+    definitions: optionDefinitions, sections: cliSections
+  } = autoAdd(optionsPath, {...options, pkg});
 
   const userOptions = commandLineArgs(optionDefinitions);
   const {help, version} = userOptions;

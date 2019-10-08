@@ -1,5 +1,15 @@
 # CHANGES for command-line-basics
 
+## 0.5.0
+
+- Enhancement (breaking): Add `autoAdd` method along with changing default
+  export to `cliBasics` named export; move `packageJsonPath` to options for
+  shorter API
+- Enhancement: Add default-true option `autoAddHeader` to automatically add
+    `header` to `sections[0]` if not present (based on the `name` in
+    `package.json`).
+- Fix: Ensure adding to `optionList` properly
+
 ## 0.4.1
 
 - Fix: Avoid exiting upon update notification
