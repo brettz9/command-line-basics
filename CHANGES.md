@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.3.0
+
+- Enhancement (breaking): Avoid applying `cwd` to `package.json`.
+
 ## 0.2.0
 
 - Enhancement (breaking): Apply `cwd` option (defaulting to `process.cwd()`) to
