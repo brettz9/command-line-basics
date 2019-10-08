@@ -15,7 +15,6 @@ module.exports = {
     {
       files: ["*.md"],
       globals: {
-        join: true,
         path: true,
         defaultsToAutoDetectBoolean: true
       },

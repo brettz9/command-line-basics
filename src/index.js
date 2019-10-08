@@ -10,10 +10,15 @@ module.exports = function (optionsPath, packageJsonPath, options) {
   if (optionsPath && typeof optionsPath === 'object') {
     ({optionsPath, packageJsonPath, options} = optionsPath);
   }
+  const cwd = options.cwd || process.cwd();
   if (!packageJsonPath) {
-    packageJsonPath = join(process.cwd(), 'package.json');
+    packageJsonPath = join(cwd, 'package.json');
   }
   options = options || {};
+  if (!optionsPath) {
+    throw new TypeError(`You must include an \`optionsPath\`.`);
+  }
+  optionsPath = join(cwd, optionsPath);
 
   // eslint-disable-next-line global-require, import/no-dynamic-require
   const pkg = require(packageJsonPath);
