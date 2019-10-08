@@ -22,7 +22,7 @@ npm i -P command-line-basics
 ## Simple usage
 
 ```js
-const cliBasics = require('command-line-basics');
+const {cliBasics} = require('command-line-basics');
 
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
@@ -41,7 +41,7 @@ if (!optionDefinitions) { // cliBasics handled
 Except for `optionsPath`, the example indicates the **defaults**:
 
 ```js
-const cliBasics = require('command-line-basics');
+const {cliBasics} = require('command-line-basics');
 
 const options = cliBasics({
   // Point to a file with a `definitions` and `sections` export (or
