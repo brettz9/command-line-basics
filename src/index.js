@@ -41,7 +41,6 @@ module.exports = function (optionsPath, packageJsonPath, options) {
     notifier.notify({
       defer: false, ...options.updateNotifierNotifyOptions
     });
-    return null;
   }
 
   if (options.autoAddVersion !== false && optionDefinitions.every(

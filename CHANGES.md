@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.4.1
+
+- Fix: Avoid exiting upon update notification
+
 ## 0.4.0
 
 - Fix: Ensure `cwd` is accessible (from object options)
