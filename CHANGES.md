@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.5.3
+
+- Fix: Avoid duplication, e.g., if `sections` is borrowing from `definitions`
+
 ## 0.5.2
 
 - Fix: Ensure `cwd` gets passed on to `autoAdd` from `cliBasics`

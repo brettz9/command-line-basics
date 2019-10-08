@@ -43,7 +43,11 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   )) {
     const versionInfo = {name: 'version', type: Boolean, alias: 'v'};
     optionDefinitions.push(versionInfo);
-    if (cliSections[1] && cliSections[1].optionList) {
+    if (cliSections[1] && cliSections[1].optionList &&
+      cliSections[1].optionList.every(
+        (def) => def.name !== 'version' && def.alias !== 'v'
+      )
+    ) {
       cliSections[1].optionList.push(versionInfo);
     }
   }
@@ -52,7 +56,11 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   )) {
     const helpInfo = {name: 'help', type: Boolean, alias: 'h'};
     optionDefinitions.push(helpInfo);
-    if (cliSections[1] && cliSections[1].optionList) {
+    if (cliSections[1] && cliSections[1].optionList &&
+      cliSections[1].optionList.every(
+        (def) => def.name !== 'help' && def.alias !== 'h'
+      )
+    ) {
       cliSections[1].optionList.push(helpInfo);
     }
   }
