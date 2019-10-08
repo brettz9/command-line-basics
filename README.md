@@ -92,3 +92,9 @@ if (!options) { // cliBasics handled
 There is also exported an `autoAdd` method which takes the same arguments
 and returns the (potentially `help`/`version` and `header` enhanced)
 `definitions` and `sections`. It is also used internally by `cliBasics`.
+
+## See also
+
+- [command-line-args](https://github.com/75lb/command-line-args)
+- [command-line-usage](https://github.com/75lb/command-line-usage/)
+- [command-line-publish](https://github.com/brettz9/command-line-publish)
