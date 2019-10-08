@@ -1,5 +1,11 @@
 # CHANGES for command-line-basics
 
+## 0.4.0
+
+- Fix: Ensure `cwd` is accessible (from object options)
+- Enhancement: Apply `cwd` to an explicit relative
+  `packageJsonPath` (but not otherwise)
+
 ## 0.3.0
 
 - Enhancement (breaking): Avoid applying `cwd` to `package.json`.

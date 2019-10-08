@@ -45,8 +45,9 @@ const options = cliBasics({
   // Point to a file with a `definitions` and `sections` export (or
   //   JSON properties)
   optionsPath: path.join(process.cwd(), './src/optionDefinitions.js'),
-  // As an alternative to joining (for `optionsPath` only;
-  // no effect on `packageJsonPath`):
+  // `cwd` is an alternative to joining (for `optionsPath` and for an
+  //  explicit `packageJsonPath`; has no effect on `package.json` if
+  //  relying on the default)
   cwd: __dirname,
   packageJsonPath: path.join(process.cwd(), 'package.json'),
   options: {

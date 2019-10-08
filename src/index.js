@@ -1,23 +1,28 @@
 'use strict';
 
-const {join} = require('path');
+const {join, isAbsolute} = require('path');
 
 const updateNotifier = require('update-notifier');
 const commandLineArgs = require('command-line-args');
 const commandLineUsage = require('command-line-usage');
 
 module.exports = function (optionsPath, packageJsonPath, options) {
+  let cwd;
   if (optionsPath && typeof optionsPath === 'object') {
-    ({optionsPath, packageJsonPath, options} = optionsPath);
+    ({optionsPath, packageJsonPath, options, cwd} = optionsPath);
   }
+  cwd = cwd || process.cwd();
   if (!packageJsonPath) {
+    // Don't use the user `cwd` by default for `package.json`
     packageJsonPath = join(process.cwd(), 'package.json');
+  } else if (!isAbsolute(packageJsonPath)) {
+    packageJsonPath = join(cwd, packageJsonPath);
   }
   options = options || {};
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
-  optionsPath = join(options.cwd || process.cwd(), optionsPath);
+  optionsPath = join(cwd, optionsPath);
 
   // eslint-disable-next-line global-require, import/no-dynamic-require
   const pkg = require(packageJsonPath);
