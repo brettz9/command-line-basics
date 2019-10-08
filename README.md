@@ -24,7 +24,9 @@ const cliBasics = require('command-line-basics');
 
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
-const optionDefinitions = cliBasics('../src/optionDefinitions.js');
+const optionDefinitions = cliBasics(
+  join(__dirname, '../src/optionDefinitions.js')
+);
 if (!optionDefinitions) { // cliBasics handled
   process.exit();
 }
@@ -40,7 +42,9 @@ Except for `optionsPath`, the example indicates the **defaults**:
 const cliBasics = require('command-line-basics');
 
 const options = cliBasics({
-  optionsPath: '../src/optionDefinitions.js',
+  // Point to a file with a `definitions` and `sections` export (or
+  //   JSON properties)
+  optionsPath: join(__dirname, '../src/optionDefinitions.js'),
   packageJsonPath: path.join(process.cwd(), 'package.json'),
   options: {
     autoAddVersion: true,
