@@ -13,9 +13,10 @@
     "url": "git+https://github.com/brettz9/command-line-basics.git"
   },
   "keywords": [
-    "npm",
+    "cli",
     "command-line-args",
-    "command-line-usage"
+    "command-line-usage",
+    "update-notifier"
   ],
   "author": "Brett Zamir",
   "contributors": [],

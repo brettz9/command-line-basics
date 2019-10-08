@@ -11,6 +11,21 @@ module.exports = {
         "Promise.all"
       ]
   },
+  overrides: [
+    {
+      files: ["*.md"],
+      globals: {
+        path: true,
+        defaultsToAutoDetectBoolean: true
+      },
+      rules: {
+        strict: 0,
+        'node/no-missing-require': 0,
+        'no-process-exit': 0,
+        'unicorn/no-process-exit': 0
+      }
+    }
+  ],
   rules: {
     "import/no-commonjs": 0,
     "node/exports-style": 0,
