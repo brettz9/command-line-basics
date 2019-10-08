@@ -56,6 +56,8 @@ const options = cliBasics({
     autoAddVersion: true,
     autoAddHelp: true,
     autoAddHeader: true,
+    autoAddOptionsHeader: true,
+    autoAddContent: true,
     updateNotifierOptions: {
       // Options besides `pkg`
       updateCheckInterval: 1000 * 60 * 60 * 24,
@@ -90,8 +92,3 @@ if (!options) { // cliBasics handled
 There is also exported an `autoAdd` method which takes the same arguments
 and returns the (potentially `help`/`version` and `header` enhanced)
 `definitions` and `sections`. It is also used internally by `cliBasics`.
-
-## To-dos
-
-1. Could auto-add `content` based on `pkg.description` and `Options` as
-    `sections[1].header`.

@@ -1,5 +1,10 @@
 # CHANGES for command-line-basics
 
+## 0.6.0
+
+- Enhancement: Auto-add `content` based on `pkg.description` and
+  `Options` as `sections[1].header`.
+
 ## 0.5.3
 
 - Fix: Avoid duplication, e.g., if `sections` is borrowing from `definitions`

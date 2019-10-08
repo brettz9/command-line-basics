@@ -64,10 +64,21 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
       cliSections[1].optionList.push(helpInfo);
     }
   }
-  if (options.autoAddHeader !== false && cliSections[0] &&
-      !cliSections[0].header
+  if (cliSections[0]) {
+    if (!cliSections[0].header && options.autoAddHeader !== false) {
+      cliSections[0].header = pkg.name;
+    }
+    if (!cliSections[0].content && options.autoAddContent !== false &&
+      pkg.description
+    ) {
+      cliSections[0].content = pkg.description;
+    }
+  }
+
+  if (cliSections[1] && !cliSections[1].header &&
+    options.autoAddOptionsHeader !== false
   ) {
-    cliSections[0].header = pkg.name;
+    cliSections[1].header = 'Options';
   }
 
   return {definitions: optionDefinitions, sections: cliSections};
