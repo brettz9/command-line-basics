@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.5.1
+
+- Fix: Ensure `cwd` gets passed on to `autoAdd` from `cliBasics`
+
 ## 0.5.0
 
 - Enhancement (breaking): Add `autoAdd` method along with changing default
