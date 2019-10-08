@@ -86,3 +86,7 @@ if (!options) { // cliBasics handled
 // Use `definitions` (which is just the result of running `command-line-args`
 //  on the `definitions` from your `optionDefinitions.js` file
 ```
+
+There is also exported an `autoAdd` method which takes the same arguments
+and returns the (potentially `help`/`version` and `header` enhanced)
+`definitions` and `sections`. It is also used internally by `cliBasics`.
