@@ -23,7 +23,7 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
   let cwd;
-  if (optionsPath && typeof optionsPath === 'object') {
+  if (typeof optionsPath === 'object') {
     ({optionsPath, options, cwd} = optionsPath);
   }
   options = options || {};
