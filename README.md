@@ -21,13 +21,30 @@ npm i -P command-line-basics
 
 ## Simple usage
 
+After adding your binary file to `package.json`, e.g.,
+
+```json
+{
+  "bin": {
+    "myCliApp": "./bin/index.js"
+  }
+}
+```
+
+...and optionally making the script executable, as with
+`chmod 0755 ./bin/index.js`, then add the following to that file:
+
 ```js
+#!/usr/bin/env node
+'use strict';
+
+const {join} = require('path');
 const {cliBasics} = require('command-line-basics');
 
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
 const optionDefinitions = cliBasics(
-  path.join(__dirname, '../src/optionDefinitions.js')
+  join(__dirname, '../src/optionDefinitions.js')
 );
 if (!optionDefinitions) { // cliBasics handled
   process.exit();

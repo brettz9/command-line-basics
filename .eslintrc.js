@@ -20,6 +20,7 @@ module.exports = {
       },
       rules: {
         strict: 0,
+        'node/shebang': 0,
         'node/no-missing-require': 0,
         'no-process-exit': 0,
         'unicorn/no-process-exit': 0
