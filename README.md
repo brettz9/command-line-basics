@@ -38,19 +38,19 @@ After adding your binary file to `package.json`, e.g.,
 #!/usr/bin/env node
 'use strict';
 
-const {join} = require('path');
 const {cliBasics} = require('command-line-basics');
 
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
 const optionDefinitions = cliBasics(
-  join(__dirname, '../src/optionDefinitions.js')
+  './src/optionDefinitions.js'
 );
 if (!optionDefinitions) { // cliBasics handled
   process.exit();
 }
-// Use `definitions` (which is just the result of running `command-line-args`
-//  on the `definitions` from your `optionDefinitions.js` file
+// Use `optionDefinitions` (which is just the result of running
+//  `command-line-args` on the `definitions` from your
+//  `optionDefinitions.js` file
 ```
 
 ## Advanced usage
