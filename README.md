@@ -40,6 +40,9 @@ After adding your binary file to `package.json`, e.g.,
 
 const {cliBasics} = require('command-line-basics');
 
+// Your main programmatic code
+const mainScript = require('../src/index.js');
+
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
 const optionDefinitions = cliBasics(
@@ -51,6 +54,7 @@ if (!optionDefinitions) { // cliBasics handled
 // Use `optionDefinitions` (which is just the result of running
 //  `command-line-args` on the `definitions` from your
 //  `optionDefinitions.js` file
+mainScript(optionDefinitions);
 ```
 
 ## Advanced usage
