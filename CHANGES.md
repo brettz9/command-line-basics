@@ -1,5 +1,10 @@
 # CHANGES for command-line-basics
 
+## 0.6.1
+
+- Fix: Use path `resolve` instead of `join` for proper relative
+   path resolution
+
 ## 0.6.0
 
 - Enhancement: Auto-add `content` based on `pkg.description` and

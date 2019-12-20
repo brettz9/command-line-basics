@@ -1,6 +1,6 @@
 'use strict';
 
-const {join, isAbsolute} = require('path');
+const {join, resolve} = require('path');
 
 const updateNotifier = require('update-notifier');
 const commandLineArgs = require('command-line-args');
@@ -11,8 +11,8 @@ const getPackageJson = (options, cwd) => {
   if (!packageJsonPath) {
     // Don't use the user `cwd` by default for `package.json`
     packageJsonPath = join(process.cwd(), 'package.json');
-  } else if (!isAbsolute(packageJsonPath)) {
-    packageJsonPath = join(cwd, packageJsonPath);
+  } else {
+    packageJsonPath = resolve(cwd, packageJsonPath);
   }
   // eslint-disable-next-line global-require, import/no-dynamic-require
   return require(packageJsonPath);
@@ -32,7 +32,7 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
     pkg = getPackageJson(options, cwd)
   } = options;
 
-  optionsPath = join(cwd, optionsPath);
+  optionsPath = resolve(cwd, optionsPath);
   const {
     definitions: optionDefinitions, sections: cliSections
   // eslint-disable-next-line global-require, import/no-dynamic-require
