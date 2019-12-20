@@ -1,6 +1,6 @@
 'use strict';
 
-const {join, resolve} = require('path');
+const {resolve} = require('path');
 
 const updateNotifier = require('update-notifier');
 const commandLineArgs = require('command-line-args');
@@ -10,7 +10,7 @@ const getPackageJson = (options, cwd) => {
   let {packageJsonPath} = options;
   if (!packageJsonPath) {
     // Don't use the user `cwd` by default for `package.json`
-    packageJsonPath = join(process.cwd(), 'package.json');
+    packageJsonPath = resolve(process.cwd(), 'package.json');
   } else {
     packageJsonPath = resolve(cwd, packageJsonPath);
   }

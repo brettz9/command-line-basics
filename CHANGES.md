@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.6.2
+
+- Fix: Avoid need for `join` entirely
+
 ## 0.6.1
 
 - Fix: Use path `resolve` instead of `join` for proper relative
