@@ -84,13 +84,13 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   return {definitions: optionDefinitions, sections: cliSections};
 };
 
-exports.cliBasics = function (optionsPath, options) {
+exports.cliBasics = function (optionsPath, options, notifierCallback) {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
   let cwd;
   if (typeof optionsPath === 'object') {
-    ({optionsPath, options, cwd} = optionsPath);
+    ({optionsPath, options, cwd, notifierCallback} = optionsPath);
   }
   options = options || {};
   cwd = cwd || process.cwd();
@@ -106,6 +106,9 @@ exports.cliBasics = function (optionsPath, options) {
     notifier.notify({
       defer: false, ...options.updateNotifierNotifyOptions
     });
+  }
+  if (notifierCallback) {
+    notifierCallback(notifier);
   }
 
   const {

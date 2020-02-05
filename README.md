@@ -72,6 +72,18 @@ const options = cliBasics({
   //  explicit `packageJsonPath`; has no effect on `package.json` if
   //  relying on the default)
   cwd: __dirname,
+  async notifierCallback (notifier) {
+    // Do something with `notifier` instance: https://github.com/yeoman/update-notifier
+    const {
+      latest, current,
+      name,
+      type // `latest`, `major`, `minor`, `patch`, `prerelease`, `build`
+    } = await notifier.fetchInfo();
+
+    console.log('Versions', latest, current);
+    console.log('Package name', name);
+    console.log('Current update type', type);
+  },
   options: {
     packageJsonPath: path.join(process.cwd(), 'package.json'),
     autoAddVersion: true,
@@ -82,9 +94,6 @@ const options = cliBasics({
     updateNotifierOptions: {
       // Options besides `pkg`
       updateCheckInterval: 1000 * 60 * 60 * 24,
-      callback (/* error, update */) {
-        // Non-cached, synchronous handling (not recommended)
-      },
       shouldNotifyInNpmScript: false,
       distTag: 'latest' // https://docs.npmjs.com/adding-dist-tags-to-packages
     },
@@ -94,7 +103,7 @@ const options = cliBasics({
       defer: false, // Our default differs from that of `update-notifier` here
       message: '',
       isGlobal: defaultsToAutoDetectBoolean,
-      boxenOpts: {
+      boxenOptions: {
         // Also `dimBorder`, `float`, and `backgroundColor`
         // See https://github.com/sindresorhus/boxen
         padding: 1, margin: 1, align: 'center',

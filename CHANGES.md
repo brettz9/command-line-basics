@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 0.7.0
+
+- Update: Alter API per `update-notifier` breaking change
+
 ## 0.6.2
 
 - Fix: Avoid need for `join` entirely
