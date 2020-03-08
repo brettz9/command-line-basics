@@ -91,6 +91,9 @@ const options = cliBasics({
     autoAddHeader: true,
     autoAddOptionsHeader: true,
     autoAddContent: true,
+    commandLineArgsOptions: {
+      // See https://github.com/75lb/command-line-args/blob/master/doc/API.md
+    },
     updateNotifierOptions: {
       // Options besides `pkg`
       updateCheckInterval: 1000 * 60 * 60 * 24,

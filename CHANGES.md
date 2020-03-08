@@ -1,5 +1,11 @@
 # CHANGES for command-line-basics
 
+## 0.8.0
+
+- Enhancement: Add `commandLineArgsOptions` to options
+- Maintenance: Add `.editorconfig`
+- npm: Update devDeps. and `update-notifier` dep.
+
 ## 0.7.0
 
 - Update: Alter API per `update-notifier` breaking change

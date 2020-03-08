@@ -115,7 +115,9 @@ exports.cliBasics = function (optionsPath, options, notifierCallback) {
     definitions: optionDefinitions, sections: cliSections
   } = autoAdd({optionsPath, cwd, ...options, pkg});
 
-  const userOptions = commandLineArgs(optionDefinitions);
+  const userOptions = commandLineArgs(
+    optionDefinitions, options.commandLineArgsOptions
+  );
   const {help, version} = userOptions;
 
   if (help) {
