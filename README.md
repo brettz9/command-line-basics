@@ -1,6 +1,14 @@
 # command-line-basics
 
-Wraps the following basic command-line functionality to your package:
+Wraps the basic command-line functionality to your package.
+
+It is probably easiest to see it in an example:
+
+1. [Binary file](https://github.com/brettz9/license-badger/blob/master/bin/index.js#LC1)
+2. [The option definitions](https://github.com/brettz9/license-badger/blob/master/src/optionDefinitions.js) (this file defines the schema and format for the CLI arguments; note: it is not necessary to export the chalk templates assuming you even need to use them at all).
+3. [The main app](https://github.com/brettz9/license-badger/blob/3799384c3e0ba5651b4b2031a32042c573e8db3f/src/index.js#L118) which receives the command line arguments ready for use.
+
+Performs the following:
 
 1. Utilizes `update-notifier` to notify the user of any updates of your
     package.
@@ -12,6 +20,7 @@ Wraps the following basic command-line functionality to your package:
     the current `version` of your `package.json`).
 3. By default, will automatically add `header` to `sections[0]` if not
     present (based on the `name` in `package.json`).
+4. All of `sections` will be passed to `command-line-usage`.
 
 ## Install
 
