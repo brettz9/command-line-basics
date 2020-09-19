@@ -140,3 +140,12 @@ and returns the (potentially `help`/`version` and `header` enhanced)
 - [command-line-args](https://github.com/75lb/command-line-args)
 - [command-line-usage](https://github.com/75lb/command-line-usage/)
 - [command-line-publish](https://github.com/brettz9/command-line-publish)
+
+## To-dos
+
+1. Utility for main files to create a file retrieval/writing function (for
+    conversions)
+1. Auto-convert JSON Schema into option defintion structures with jsdoc (and
+    the converted JSON Schema) enhanced to add CLI properties,
+    e.g., any alias (`@cli-alias {file} f`) and possibly its `typeLabel`.
+    Default should be deducible.
