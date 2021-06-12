@@ -1,8 +1,10 @@
 {
   "name": "command-line-basics",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Auto-add help and version CLI and update notification checks",
   "main": "src/index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "scripts": {
     "eslint": "eslint --ext=js,md,html .",
     "lint": "npm run eslint",
@@ -24,7 +26,7 @@
   "bugs": "https://github.com/brettz9/command-line-basics/issues",
   "homepage": "https://github.com/brettz9/command-line-basics#readme",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "devDependencies": {
     "@brettz9/eslint-plugin": "^1.0.3",

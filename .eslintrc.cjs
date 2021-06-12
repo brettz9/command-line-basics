@@ -1,15 +1,19 @@
 'use strict';
 
 module.exports = {
-  extends: ['ash-nazg/sauron-node-script-overrides'],
+  extends: ['ash-nazg/sauron-node-overrides'],
   env: {
     'shared-node-browser': true
+  },
+  parserOptions: {
+    ecmaVersion: 2021
   },
   settings: {
     polyfills: [
       'Object.entries',
       'Promise',
-      'Promise.all'
+      'Promise.all',
+      'URL'
     ]
   },
   overrides: [

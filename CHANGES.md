@@ -1,5 +1,10 @@
 # CHANGES for command-line-basics
 
+## 1.0.0
+
+- Breaking change: Switch to native ESM; require Node 14
+- Breaking change: Switch `autoAdd` and `cliBasics` to async functions
+
 ## 0.8.0
 
 - Enhancement: Add `commandLineArgsOptions` to options

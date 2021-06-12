@@ -1,22 +1,21 @@
-'use strict';
+import {readFile} from 'fs/promises';
+import {resolve} from 'path';
 
-const {resolve} = require('path');
+import updateNotifier from 'update-notifier';
+import commandLineArgs from 'command-line-args';
+import commandLineUsage from 'command-line-usage';
 
-const updateNotifier = require('update-notifier');
-const commandLineArgs = require('command-line-args');
-const commandLineUsage = require('command-line-usage');
-
-const getPackageJson = (options, cwd) => {
+const getPackageJson = async (options, cwd) => {
   let {packageJsonPath} = options;
   packageJsonPath = packageJsonPath
     ? resolve(cwd, packageJsonPath)
     : resolve(process.cwd(), 'package.json');
-  // eslint-disable-next-line max-len -- Long
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require -- Runtime
-  return require(packageJsonPath);
+  return JSON.parse(
+    await readFile(packageJsonPath)
+  );
 };
 
-const autoAdd = exports.autoAdd = function (optionsPath, options) {
+const autoAdd = async (optionsPath, options) => {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
@@ -27,15 +26,14 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   options = options || {};
   cwd = cwd || process.cwd();
   const {
-    pkg = getPackageJson(options, cwd)
+    pkg = await getPackageJson(options, cwd)
   } = options;
 
   optionsPath = resolve(cwd, optionsPath);
   const {
     definitions: optionDefinitions, sections: cliSections
-  // eslint-disable-next-line max-len -- Long
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require -- User-specified
-  } = require(optionsPath);
+  // eslint-disable-next-line no-unsanitized/method -- User prompted
+  } = await import(optionsPath);
 
   if (options.autoAddVersion !== false && optionDefinitions.every(
     (def) => def.name !== 'version' && def.alias !== 'v'
@@ -83,7 +81,7 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   return {definitions: optionDefinitions, sections: cliSections};
 };
 
-exports.cliBasics = function (optionsPath, options, notifierCallback) {
+const cliBasics = async (optionsPath, options, notifierCallback) => {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
   }
@@ -93,7 +91,7 @@ exports.cliBasics = function (optionsPath, options, notifierCallback) {
   }
   options = options || {};
   cwd = cwd || process.cwd();
-  const pkg = getPackageJson(options, cwd);
+  const pkg = await getPackageJson(options, cwd);
 
   // check if a new version is available and print an update notification
   const notifier = updateNotifier({
@@ -112,7 +110,7 @@ exports.cliBasics = function (optionsPath, options, notifierCallback) {
 
   const {
     definitions: optionDefinitions, sections: cliSections
-  } = autoAdd({optionsPath, cwd, ...options, pkg});
+  } = await autoAdd({optionsPath, cwd, ...options, pkg});
 
   const userOptions = commandLineArgs(
     optionDefinitions, options.commandLineArgsOptions
@@ -131,3 +129,5 @@ exports.cliBasics = function (optionsPath, options, notifierCallback) {
 
   return userOptions;
 };
+
+export {autoAdd, cliBasics};
