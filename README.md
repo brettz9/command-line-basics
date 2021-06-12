@@ -69,7 +69,6 @@ mainScript(optionDefinitions);
 Except for `optionsPath`, the example indicates the **defaults**:
 
 ```js
-
 import {dirname} from 'path'; // For `__dirname`
 import {fileURLToPath} from 'url'; // For `__dirname`
 import {cliBasics} from 'command-line-basics';
@@ -132,7 +131,7 @@ if (!options) { // cliBasics handled
   process.exit(0);
 }
 // Use `definitions` (which is just the result of running `command-line-args`
-//  on the `definitions` from your `optionDefinitions.js` file
+//  on the `definitions` from your `optionDefinitions.js` file)
 ```
 
 There is also exported an `autoAdd` method which takes the same arguments
