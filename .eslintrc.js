@@ -1,19 +1,20 @@
+'use strict';
+
 module.exports = {
-  extends: ["ash-nazg/sauron-node", "plugin:node/recommended-script"],
+  extends: ['ash-nazg/sauron-node-script-overrides'],
   env: {
-    node: true,
-    browser: true
+    'shared-node-browser': true
   },
   settings: {
-      polyfills: [
-        "Object.entries",
-        "Promise",
-        "Promise.all"
-      ]
+    polyfills: [
+      'Object.entries',
+      'Promise',
+      'Promise.all'
+    ]
   },
   overrides: [
     {
-      files: ["*.md"],
+      files: ['*.md/*.js'],
       globals: {
         path: true,
         defaultsToAutoDetectBoolean: true
@@ -21,16 +22,12 @@ module.exports = {
       rules: {
         strict: 0,
         'node/shebang': 0,
-        'node/no-unpublished-require': 0,
-        'node/no-missing-require': 0,
-        'no-process-exit': 0,
         'unicorn/no-process-exit': 0
       }
     }
   ],
   rules: {
-    "import/no-commonjs": 0,
-    "node/exports-style": 0,
-    "no-console": 0
+    'node/exports-style': 0,
+    'no-console': 0
   }
 };

@@ -8,13 +8,11 @@ const commandLineUsage = require('command-line-usage');
 
 const getPackageJson = (options, cwd) => {
   let {packageJsonPath} = options;
-  if (!packageJsonPath) {
-    // Don't use the user `cwd` by default for `package.json`
-    packageJsonPath = resolve(process.cwd(), 'package.json');
-  } else {
-    packageJsonPath = resolve(cwd, packageJsonPath);
-  }
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  packageJsonPath = packageJsonPath
+    ? resolve(cwd, packageJsonPath)
+    : resolve(process.cwd(), 'package.json');
+  // eslint-disable-next-line max-len -- Long
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require -- Runtime
   return require(packageJsonPath);
 };
 
@@ -35,7 +33,8 @@ const autoAdd = exports.autoAdd = function (optionsPath, options) {
   optionsPath = resolve(cwd, optionsPath);
   const {
     definitions: optionDefinitions, sections: cliSections
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line max-len -- Long
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require -- User-specified
   } = require(optionsPath);
 
   if (options.autoAddVersion !== false && optionDefinitions.every(
