@@ -1,5 +1,9 @@
 # CHANGES for command-line-basics
 
+## 1.0.1
+
+- Fix: Add missing devDep. `@babel/core`
+
 ## 1.0.0
 
 - Breaking change: Switch to native ESM; require Node 14

@@ -1,6 +1,6 @@
 {
   "name": "command-line-basics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Auto-add help and version CLI and update notification checks",
   "main": "src/index.js",
   "type": "module",
@@ -30,6 +30,7 @@
     "node": ">=14.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
     "@babel/eslint-parser": "^7.14.5",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
     "@brettz9/eslint-plugin": "^1.0.3",
