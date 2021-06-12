@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@babel/eslint-parser': ^7.14.5
+  '@babel/plugin-syntax-top-level-await': ^7.14.5
   '@brettz9/eslint-plugin': ^1.0.3
   command-line-args: ^5.1.1
   command-line-usage: ^6.1.1
@@ -29,6 +31,8 @@ dependencies:
   update-notifier: 5.1.0
 
 devDependencies:
+  '@babel/eslint-parser': 7.14.5_eslint@7.28.0
+  '@babel/plugin-syntax-top-level-await': 7.14.5
   '@brettz9/eslint-plugin': 1.0.3_eslint@7.28.0
   eslint: 7.28.0
   eslint-config-ash-nazg: 29.17.0_931b2dae707158f3e1dd349409f64969
@@ -99,6 +103,19 @@ packages:
       eslint: '>=7.5.0'
     dependencies:
       '@babel/core': 7.14.5
+      eslint: 7.28.0
+      eslint-scope: 5.1.1
+      eslint-visitor-keys: 2.1.0
+      semver: 6.3.0
+    dev: true
+
+  /@babel/eslint-parser/7.14.5_eslint@7.28.0:
+    resolution: {integrity: sha512-20BlOHuGf3UXS7z1QPyllM9Gz8SEgcp/UcKeUmdHIFZO6HF1n+3KaLpeyfwWvjY/Os/ynPX3k8qXE/nZ5dw/0g==}
+    engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
+    peerDependencies:
+      '@babel/core': '>=7.11.0'
+      eslint: '>=7.5.0'
+    dependencies:
       eslint: 7.28.0
       eslint-scope: 5.1.1
       eslint-visitor-keys: 2.1.0
@@ -187,6 +204,11 @@ packages:
       '@babel/types': 7.14.5
     dev: true
 
+  /@babel/helper-plugin-utils/7.14.5:
+    resolution: {integrity: sha512-/37qQCE3K0vvZKwoK4XU/irIJQdIfCJuhU5eKnNxpFDsOkgFaUAwbv+RYw6eYgsC0E4hS7r5KqGULUogqui0fQ==}
+    engines: {node: '>=6.9.0'}
+    dev: true
+
   /@babel/helper-replace-supers/7.14.5:
     resolution: {integrity: sha512-3i1Qe9/8x/hCHINujn+iuHy+mMRLoc77b2nI9TB0zjH1hvn9qGlXjWlggdwUcju36PkPCy/lpM7LLUdcTyH4Ow==}
     engines: {node: '>=6.9.0'}
@@ -247,6 +269,15 @@ packages:
     resolution: {integrity: sha512-TM8C+xtH/9n1qzX+JNHi7AN2zHMTiPUtspO0ZdHflW8KaskkALhMmuMHb4bCmNdv9VAPzJX3/bXqkVLnAvsPfg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dev: true
+
+  /@babel/plugin-syntax-top-level-await/7.14.5:
+    resolution: {integrity: sha512-hx++upLv5U1rgYfwe1xBQUhRmU41NEvpUvrp8jkrSCdvGSnM5/qdRMtylJ6PG5OFkBaHkbTAKTnd3/YyESRHFw==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/helper-plugin-utils': 7.14.5
     dev: true
 
   /@babel/template/7.14.5:

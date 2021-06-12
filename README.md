@@ -45,20 +45,18 @@ After adding your binary file to `package.json`, e.g.,
 
 ```js
 #!/usr/bin/env node
-'use strict';
-
-const {cliBasics} = require('command-line-basics');
+import {cliBasics} from 'command-line-basics';
 
 // Your main programmatic code
-const mainScript = require('../src/index.js');
+import mainScript from '../src/index.js';
 
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
-const optionDefinitions = cliBasics(
+const optionDefinitions = await cliBasics(
   './src/optionDefinitions.js'
 );
 if (!optionDefinitions) { // cliBasics handled
-  process.exit();
+  process.exit(0);
 }
 // Use `optionDefinitions` (which is just the result of running
 //  `command-line-args` on the `definitions` from your
@@ -71,9 +69,15 @@ mainScript(optionDefinitions);
 Except for `optionsPath`, the example indicates the **defaults**:
 
 ```js
-const {cliBasics} = require('command-line-basics');
 
-const options = cliBasics({
+import {dirname} from 'path'; // For `__dirname`
+import {fileURLToPath} from 'url'; // For `__dirname`
+import {cliBasics} from 'command-line-basics';
+
+// For `__dirname`
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const options = await cliBasics({
   // Point to a file with a `definitions` and `sections` export (or
   //   JSON properties)
   optionsPath: path.join(process.cwd(), './src/optionDefinitions.js'),
@@ -125,7 +129,7 @@ const options = cliBasics({
   }
 });
 if (!options) { // cliBasics handled
-  process.exit();
+  process.exit(0);
 }
 // Use `definitions` (which is just the result of running `command-line-args`
 //  on the `definitions` from your `optionDefinitions.js` file

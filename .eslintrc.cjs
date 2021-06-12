@@ -5,6 +5,7 @@ module.exports = {
   env: {
     'shared-node-browser': true
   },
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2021
   },
@@ -26,7 +27,11 @@ module.exports = {
       rules: {
         strict: 0,
         'node/shebang': 0,
-        'unicorn/no-process-exit': 0
+        'unicorn/no-process-exit': 0,
+        'import/default': 0,
+        'import/no-unresolved': ['error', {
+          ignore: ['command-line-basics', '../src/index.js']
+        }]
       }
     }
   ],
