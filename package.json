@@ -6,6 +6,7 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
+    "prepublishOnly": "pnpm i",
     "eslint": "eslint --ext=js,md,html .",
     "lint": "npm run eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
