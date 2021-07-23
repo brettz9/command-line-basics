@@ -1,6 +1,6 @@
 {
   "name": "command-line-basics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Auto-add help and version CLI and update notification checks",
   "main": "src/index.js",
   "type": "module",

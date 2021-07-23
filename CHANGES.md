@@ -1,7 +1,8 @@
 # CHANGES for command-line-basics
 
-## ?
+## 1.0.2
 
+- npm: Ignore `pnpm-lock.yaml`
 - npm: Update devDeps. and `command-line-args` (patch)
 
 ## 1.0.1
