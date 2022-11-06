@@ -26,7 +26,7 @@ module.exports = {
       },
       rules: {
         strict: 0,
-        'node/shebang': 0,
+        'n/shebang': 0,
         'unicorn/no-process-exit': 0,
         'import/default': 0,
         'import/no-unresolved': ['error', {

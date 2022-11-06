@@ -1,5 +1,11 @@
 # CHANGES for command-line-basics
 
+## 1.1.0
+
+- chore: update from vulnerable `update-notifier`; update
+    `command-line-args`/`command-line-usage`
+- chore: update devDeps.
+
 ## 1.0.2
 
 - npm: Ignore `pnpm-lock.yaml`
