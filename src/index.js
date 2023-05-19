@@ -5,16 +5,61 @@ import updateNotifier from 'update-notifier';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 
+/**
+ * @typedef {any} JSONValue
+ */
+
+/**
+ * @typedef {{
+ *   packageJsonPath?: string
+* }} PackageJsonPathOptions
+ */
+
+/**
+ * @param {PackageJsonPathOptions} options
+ * @param {string} cwd
+ * @returns {Promise<JSONValue>}
+ */
 const getPackageJson = async (options, cwd) => {
   let {packageJsonPath} = options;
   packageJsonPath = packageJsonPath
     ? resolve(cwd, packageJsonPath)
     : resolve(process.cwd(), 'package.json');
   return JSON.parse(
+    // @ts-expect-error It's ok
     await readFile(packageJsonPath)
   );
 };
 
+/**
+ * @typedef {{
+ *   pkg?: JSONValue,
+ *   autoAddVersion?: boolean,
+ *   autoAddHelp?: boolean,
+ *   autoAddHeader?: boolean,
+ *   autoAddContent?: boolean,
+ *   autoAddOptionsHeader?: boolean
+ * } & PackageJsonPathOptions} AutoAddOptions
+ */
+
+/**
+ * @typedef {{
+ *   optionsPath: string,
+ *   options?: AutoAddOptions,
+ *   cwd?: string,
+ *   pkg?: JSONValue
+ * }} OptionsPath
+ */
+
+/**
+ * @param {string|OptionsPath} optionsPath
+ * @param {AutoAddOptions} [options]
+ * @throws {TypeError}
+ * @returns {Promise<{
+ *   definitions: import('command-line-usage').OptionDefinition[],
+ *   sections: import('command-line-usage').Section[]
+ * }>}
+ */
 const autoAdd = async (optionsPath, options) => {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
@@ -32,15 +77,23 @@ const autoAdd = async (optionsPath, options) => {
   optionsPath = resolve(cwd, optionsPath);
   const {
     definitions: optionDefinitions, sections: cliSections
-  // eslint-disable-next-line no-unsanitized/method -- User prompted
-  } = await import(optionsPath);
+  } =
+  /* eslint-disable no-unsanitized/method -- User prompted */
+    /**
+     * @type {{
+     *   definitions: import('command-line-usage').OptionDefinition[],
+     *   sections: import('command-line-usage').Section[]
+     * }}
+     */ (await import(optionsPath));
+    /* eslint-enable no-unsanitized/method -- User prompted */
 
   if (options.autoAddVersion !== false && optionDefinitions.every(
     (def) => def.name !== 'version' && def.alias !== 'v'
   )) {
     const versionInfo = {name: 'version', type: Boolean, alias: 'v'};
     optionDefinitions.push(versionInfo);
-    if (cliSections[1] && cliSections[1].optionList &&
+    if (cliSections[1] && 'optionList' in cliSections[1] &&
+      cliSections[1].optionList &&
       cliSections[1].optionList.every(
         (def) => def.name !== 'version' && def.alias !== 'v'
       )
@@ -53,7 +106,8 @@ const autoAdd = async (optionsPath, options) => {
   )) {
     const helpInfo = {name: 'help', type: Boolean, alias: 'h'};
     optionDefinitions.push(helpInfo);
-    if (cliSections[1] && cliSections[1].optionList &&
+    if (cliSections[1] && 'optionList' in cliSections[1] &&
+      cliSections[1].optionList &&
       cliSections[1].optionList.every(
         (def) => def.name !== 'help' && def.alias !== 'h'
       )
@@ -65,10 +119,14 @@ const autoAdd = async (optionsPath, options) => {
     if (!cliSections[0].header && options.autoAddHeader !== false) {
       cliSections[0].header = pkg.name;
     }
-    if (!cliSections[0].content && options.autoAddContent !== false &&
+    if (
+      (!('content' in cliSections[0]) || !cliSections[0].content) &&
+      options.autoAddContent !== false &&
       pkg.description
     ) {
-      cliSections[0].content = pkg.description;
+      /** @type {import('command-line-usage').Content} */ (
+        cliSections[0]
+      ).content = pkg.description;
     }
   }
 
@@ -81,6 +139,32 @@ const autoAdd = async (optionsPath, options) => {
   return {definitions: optionDefinitions, sections: cliSections};
 };
 
+/**
+ * @callback NotifierCallback
+ * @param {import('update-notifier').UpdateNotifier} notifier
+ * @returns {void}
+ */
+
+/**
+ * @typedef {AutoAddOptions & {
+ *   commandLineArgsOptions?: import('command-line-args').ParseOptions
+ *   updateNotifierOptions?: import('update-notifier').Settings,
+ *   updateNotifierNotifyOptions?: import('update-notifier').NotifyOptions|false
+ * }} CliBasicsOptions
+ */
+
+/**
+ * @param {string|({
+ *   optionsPath: string,
+ *   options?: CliBasicsOptions,
+ *   cwd?: string
+ *   notifierCallback?: NotifierCallback
+ * })} optionsPath
+ * @param {CliBasicsOptions} [options]
+ * @param {NotifierCallback} [notifierCallback]
+ * @throws {TypeError}
+ * @returns {Promise<import('command-line-args').CommandLineOptions|null>}
+ */
 const cliBasics = async (optionsPath, options, notifierCallback) => {
   if (!optionsPath) {
     throw new TypeError(`You must include an \`optionsPath\`.`);
