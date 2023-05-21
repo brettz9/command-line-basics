@@ -1,8 +1,8 @@
 # CHANGES for command-line-basics
 
-## ?
+## 2.0.0
 
-- refactor: TS work
+- feat: TS typings
 - chore: update `command-line-usage` and devDeps.
 
 ## 1.1.0
