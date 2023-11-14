@@ -1,5 +1,10 @@
 # CHANGES for command-line-basics
 
+## 2.0.1
+
+- chore: update tsc `moduleResolution`
+- chore: update devDeps.
+
 ## 2.0.0
 
 - feat: TS typings
