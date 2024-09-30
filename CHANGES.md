@@ -1,5 +1,13 @@
 # CHANGES for command-line-basics
 
+## 3.0.0 (unreleased)
+
+BREAKING CHANGE:
+
+Requires Node 18+
+
+- chore: update deps, devDeps. and lint
+
 ## 2.0.1
 
 - chore: update tsc `moduleResolution`

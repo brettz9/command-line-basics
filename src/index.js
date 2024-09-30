@@ -78,14 +78,14 @@ const autoAdd = async (optionsPath, options) => {
   const {
     definitions: optionDefinitions, sections: cliSections
   } =
-  /* eslint-disable no-unsanitized/method -- User prompted */
+  // /* eslint-disable no-unsanitized/method -- User prompted */
     /**
      * @type {{
      *   definitions: import('command-line-usage').OptionDefinition[],
      *   sections: import('command-line-usage').Section[]
      * }}
      */ (await import(optionsPath));
-    /* eslint-enable no-unsanitized/method -- User prompted */
+    // /* eslint-enable no-unsanitized/method -- User prompted */
 
   if (options.autoAddVersion !== false && optionDefinitions.every(
     (def) => def.name !== 'version' && def.alias !== 'v'
