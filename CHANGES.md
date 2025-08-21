@@ -1,11 +1,12 @@
 # CHANGES for command-line-basics
 
-## 3.0.0 (unreleased)
+## 3.0.0
 
 BREAKING CHANGE:
 
-Requires Node 18+
+Requires Node >= 20.11.0
 
+- fix: supply of `options` to `autoAdd` in `cliOptions`
 - chore: update deps, devDeps. and lint
 
 ## 2.0.1

@@ -14,10 +14,10 @@ export default [
     rules: {
       'n/hashbang': 0,
       'unicorn/no-process-exit': 0,
-      'import/default': 0
-      // 'import/no-unresolved': ['error', {
-      //   ignore: ['command-line-basics', '../src/index.js']
-      // }]
+      'import/default': 0,
+      'import/no-unresolved': ['error', {
+        ignore: ['command-line-basics', '../src/index.js']
+      }]
     }
   },
   {

@@ -53,7 +53,10 @@ import mainScript from '../src/index.js';
 // Point to a file with a `definitions` and `sections` export (or
 //   JSON properties)
 const optionDefinitions = await cliBasics(
-  './src/optionDefinitions.js'
+  './src/optionDefinitions.js',
+  {
+    packageJsonPath: import.meta.dirname + '/../package.json'
+  }
 );
 if (!optionDefinitions) { // cliBasics handled
   process.exit(0);

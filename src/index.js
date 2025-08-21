@@ -194,7 +194,7 @@ const cliBasics = async (optionsPath, options, notifierCallback) => {
 
   const {
     definitions: optionDefinitions, sections: cliSections
-  } = await autoAdd({optionsPath, cwd, ...options, pkg});
+  } = await autoAdd({optionsPath, cwd, options, pkg});
 
   const userOptions = commandLineArgs(
     optionDefinitions, options.commandLineArgsOptions

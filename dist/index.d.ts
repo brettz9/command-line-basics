@@ -16,11 +16,11 @@ export type OptionsPath = {
     cwd?: string;
     pkg?: JSONValue;
 };
-export type NotifierCallback = (notifier: import('update-notifier').UpdateNotifier) => void;
+export type NotifierCallback = (notifier: import("update-notifier").UpdateNotifier) => void;
 export type CliBasicsOptions = AutoAddOptions & {
-    commandLineArgsOptions?: import('command-line-args').ParseOptions;
-    updateNotifierOptions?: import('update-notifier').Settings;
-    updateNotifierNotifyOptions?: import('update-notifier').NotifyOptions | false;
+    commandLineArgsOptions?: import("command-line-args").ParseOptions;
+    updateNotifierOptions?: import("update-notifier").Settings;
+    updateNotifierNotifyOptions?: import("update-notifier").NotifyOptions | false;
 };
 /**
  * @typedef {{
@@ -49,9 +49,9 @@ export type CliBasicsOptions = AutoAddOptions & {
  *   sections: import('command-line-usage').Section[]
  * }>}
  */
-export function autoAdd(optionsPath: string | OptionsPath, options?: AutoAddOptions | undefined): Promise<{
-    definitions: import('command-line-usage').OptionDefinition[];
-    sections: import('command-line-usage').Section[];
+export function autoAdd(optionsPath: string | OptionsPath, options?: AutoAddOptions): Promise<{
+    definitions: import("command-line-usage").OptionDefinition[];
+    sections: import("command-line-usage").Section[];
 }>;
 /**
  * @callback NotifierCallback
@@ -77,10 +77,10 @@ export function autoAdd(optionsPath: string | OptionsPath, options?: AutoAddOpti
  * @throws {TypeError}
  * @returns {Promise<import('command-line-args').CommandLineOptions|null>}
  */
-export function cliBasics(optionsPath: string | {
+export function cliBasics(optionsPath: string | ({
     optionsPath: string;
-    options?: CliBasicsOptions | undefined;
-    cwd?: string | undefined;
-    notifierCallback?: NotifierCallback | undefined;
-}, options?: CliBasicsOptions | undefined, notifierCallback?: NotifierCallback | undefined): Promise<import('command-line-args').CommandLineOptions | null>;
+    options?: CliBasicsOptions;
+    cwd?: string;
+    notifierCallback?: NotifierCallback;
+}), options?: CliBasicsOptions, notifierCallback?: NotifierCallback): Promise<import("command-line-args").CommandLineOptions | null>;
 //# sourceMappingURL=index.d.ts.map
